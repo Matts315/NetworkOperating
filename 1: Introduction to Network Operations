@@ -1,0 +1,11 @@
+import ipaddress
+address= input("Ip address and Subnet Mask in CIDR:")
+slash=address.find("/")
+subnetAddress=address[0:slash]
+print("Subnet Address: ",subnetAddress)
+ad= ipaddress.IPv4Network(address, False)
+broadcast = ad.broadcast_address
+print("Broadcast address: " , broadcast)
+fadd = ipaddress.IPv4Address(subnetAddress) + 1
+ladd = broadcast - 1
+print("Valid Host range: ", fadd, "-", ladd)
