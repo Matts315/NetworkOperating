@@ -1,0 +1,9 @@
+import requests
+import bs4
+inp= input("Search: ")
+url = "https://google.com/search?q=" + inp
+info = requests.get( url )
+soup = bs4.BeautifulSoup(info.text,"html.parser")
+filt=soup.find_all("h3")
+for i in range(0,10):
+    print(filt[i].get_text())
