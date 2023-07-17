@@ -1,0 +1,15 @@
+import http.server
+host = input("Give host address: ")
+port = int(input("Give port: "))
+server_address = (host, port)
+
+class wt(http.server.BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.send_header("Content-type", "text/html")
+        self.end_headers()
+        self.wfile.write(b"<html><body><h1> Hello Taymor </h1></body></html>")
+
+
+done = http.server.HTTPServer(server_address, wt)
+done.serve_forever()
