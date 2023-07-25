@@ -1,0 +1,14 @@
+from scapy.all import sniff, IP, ICMP, sr1
+destination_ip = "10.0.0.164"
+capture_count = 5
+print("ICMP:")
+packets = sniff(count=capture_count)
+print(packets)
+print("IP:")
+packets[IP].show()
+targetIP = "10.0.0.124"
+print("ping: ")
+pingRequest = IP(dst=targetIP) / ICMP()
+response = sr1(pingRequest)
+
+print(f"Starting Ip was: {response.src}")
