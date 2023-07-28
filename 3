@@ -1,14 +1,20 @@
 from scapy.all import sniff, IP, ICMP, sr1
-destination_ip = "10.0.0.164"
+import time
 capture_count = 5
 print("ICMP:")
 packets = sniff(count=capture_count)
 print(packets)
 print("IP:")
 packets[IP].show()
-targetIP = "10.0.0.124"
+targetIP = "INSERT"
 print("ping: ")
 pingRequest = IP(dst=targetIP) / ICMP()
 response = sr1(pingRequest)
+start_time = time.time()
+
+response = sr1(pingRequest, verbose=False, timeout=10)
+if response:   
+    rtt = (time.time() - start_time) * 1000   
+    print(f"Round-Trip Time (RTT): {rtt:.2f} ms")
 
 print(f"Starting Ip was: {response.src}")
