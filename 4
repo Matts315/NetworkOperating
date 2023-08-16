@@ -1,0 +1,23 @@
+import paramiko
+import subprocess
+hostname = 'insert ur target IP here'
+port = 22
+username = 'the username'
+password = 'the password'
+local = 'insert ur path here'
+remote = 'insert ur path here'
+client = paramiko.SSHClient()
+client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+client.connect(hostname, port, username=username, password=password)
+sftp = client.open_sftp()
+sftp.put(local, remote)
+sftp.close()
+client.close()
+network_interfaces = subprocess.run(["ifconfig"], capture_output=True, text=True)
+network_interfaces_ = network_interfaces.stdout
+processes = subprocess.run(["ps", "aux"], capture_output=True, text=True)
+processes_ = processes.stdout
+print("Networks:")
+print(network_interfaces_)
+print("Processes:")
+print(processes_)
