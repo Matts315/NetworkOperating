@@ -13,8 +13,8 @@ sftp = client.open_sftp()
 sftp.put(local, remote)
 sftp.close()
 client.close()
-network_interfaces = subprocess.run(["ifconfig"], capture_output=True, text=True)
-network_interfaces_ = network_interfaces.stdout
+ip_interfaces = subprocess.run(["ssh", username + "@" + hostname, "ip", "link"], capture_output=True, text=True)
+network_interfaces_ = ip_interfaces.stdout
 processes = subprocess.run(["ps", "aux"], capture_output=True, text=True)
 processes_ = processes.stdout
 print("Networks:")
