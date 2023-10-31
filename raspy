@@ -1,0 +1,29 @@
+import os
+import serial
+
+# Set up the serial connection to the Arduino GSM module
+ser = serial.Serial(CONNECT ARDUINO)
+
+def getImage():
+
+    os.system("raspistill -o image.jpg")
+
+
+    imageO = open('image.jpg', 'r')
+    data = imageO.read()
+    imageO.close()
+
+    #to arduino
+    ser.write(data)
+
+
+getImage()
+
+#This can also work too
+#from picamera import PiCamera
+#from time import sleep
+#camera.start_preview()
+#for i in range(5):
+#    sleep(5)
+#    camera.capture('/home/pi/Desktop/image%s.jpg' % i)
+#camera.stop_preview()
